@@ -4,18 +4,13 @@ components that present those interfaces. This focuses on functional signals rat
 than physial connectors. Each functional signal would map to a physical connector/pin
 at a separate realization layer.
  """
-vocabulary <http://dw-oml-3.github.io/library/electrical#> as electrical {
+vocabulary <http://dw-oml-3.github.io/library/electrical/components#> as ee {
     extends <http://purl.org/dc/elements/1.1/> as dc
     //extends <http://www.w3.org/2001/XMLSchema#> as xsd
 	//extends <http://dw-oml-3.github.io/foundation/base/base#> as base
     extends <http://dw-oml-3.github.io/foundation/system/system#> as system
 
-    // should we specialize Interface as EndCircuit? Not so important to have this abstraction
-    // if we are going to specialize to lower signal types anyway. 
-    // Multisignal junctions (e.g., power over ethernet where the same wire conducts both
-    // a dc power signal and an ac data signal) should be defined as distinct types
-
-    // needs one PowerIn interface
+        // needs one PowerIn interface
     @dc:description """Basically an electrical resistor designed to convert input power to heat. """
     concept Heater < system:Component
 

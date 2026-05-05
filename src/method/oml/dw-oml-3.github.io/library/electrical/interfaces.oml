@@ -1,0 +1,80 @@
+@dc:title "Demo Functional Electrical Interface Vocabulary"
+@dc:description """Defines types for functional electrical interfaces and canonical
+components that present those interfaces. This focuses on functional signals rather
+than physial connectors. Each functional signal would map to a physical connector/pin
+at a separate realization layer.
+ """
+vocabulary <http://dw-oml-3.github.io/library/electrical/interfaces#> as eeif {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    //extends <http://www.w3.org/2001/XMLSchema#> as xsd
+	//extends <http://dw-oml-3.github.io/foundation/base/base#> as base
+    extends <http://dw-oml-3.github.io/foundation/system/system#> as system
+
+    concept EndCircuit < system:Interface
+
+    concept Bank < system:InterfaceGroup [
+        restricts all system:presents to EndCircuit
+    ]
+
+    @dc:description "base power interface. Can also be used for ambiguous or birirectional flows"
+    concept PowerEndCircuit < EndCircuit
+
+    @dc:description "Generic power output interface (a source)"
+	concept PowerSource < PowerEndCircuit [
+		restricts system:flow to "out"
+    ]
+
+    @dc:description "Generalizaton for all Power Switches having a current rating property"
+	concept PowerSwitch < PowerSource
+
+    @dc:description "Generic power input interface (a load)"
+	concept PowerLoad < PowerEndCircuit [
+		restricts system:flow to "in"
+    ]
+    // loads can have specific demand properties such as min voltage, max current, power demand needed to
+    // specify junction wires. Those are probably distinct from modal behavioral characterizations unless you 
+    // include modes for worst case conditions that you wouldn't otherwise use for nominal supply/demand
+    // balancing.
+
+    concept SupplyPower < system:Junction [
+        restricts all system:joins to PowerEndCircuit
+    ]
+
+    // composes multiple channels we will not model here. Different channels have different directionality
+    // but the composition is not specified and is implicitly bidirectional
+    concept RS422EndCircuit < EndCircuit
+
+    concept RS422Comm < system:Junction [
+        restricts all system:joins to RS422EndCircuit
+    ]
+
+    // The taxonomy of remaining end circuit types will need
+    // some work. What we ended up with on CAESAR was a bit
+    // JPL-focused and rather hard to explain. 
+    // We don't really need or want a full taxonomy of
+    // possible types. The library will be more useful if
+    // the types can be customized to an application domain
+    // so that users don't have to sift through a lot of
+    // irrelevant types to find the few they care about.
+    // That can already be done through library specialization
+    // or just making up your own independent library.
+    // But we want to at least provide some good examples
+    // here.
+    // The trick is to identify the useful levels of 
+    // functional taxonomy that will be the most useful.
+    // There might be many levels. In general there is not
+    // much use for generalizations. 
+    // In CAESAR the users had some mixed conventions about
+    // identifying "functions". For something like RS422 or
+    // Spacewire which have multiple LVDS channels they still
+    // wanted to model and name the individual channels partly
+    // because they used to identify each individual channel as
+    // a function. While each channel has a distinct function,
+    // they are strongly related so it comes down to a choice
+    // of which level of functionality you need/want to model.
+    // Modeling at the higher level of composition is more
+    // concise and does not lose any information as long as
+    // there are canonical rules about how RS422 composes a
+    // canonical set of channels. We then just leave that expansion
+    // as a separate design problem.
+}

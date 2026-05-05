@@ -6,20 +6,26 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
 	extends <http://dw-oml-3.github.io/foundation/base/base#> as base
 
 
+    @dc:description "Element that can present an interface"
     aspect PresentingElement
+    @dc:description "Generalization of interface (for grouping)"
     aspect PresentedElement
+    @dc:description "Things that perform Functions"
     aspect PerformingElement
 
     @dc:description """An abstract description of the functional purpose"""
     concept Function < base:IdentifiedElement
 
     relation performs [
-        from Component
+        from PerformingElement
         to Function
         inverse functional
     ]
 
-    concept Component < base:IdentifiedElement, PresentingElement, PerformingElement
+    concept Composable < PerformingElement, base:IdentifiedElement
+
+    concept Component < PresentingElement, Composable
+
     scalar property componentId [
         domain Component
         range xsd:string
@@ -42,20 +48,22 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
     ] < base:hasIdentifier
 
     @dc:description "Interface Direction."
-    scalar Direction [
-        oneOf "In", "Out", "InOut"
+    scalar DirectionType [
+        oneOf "in", "out", "both"
     ]
 
     // interfaces can have direction but junctions don't.
     // the direction of a junction might be inferred from its
     // interfaces but not all interfaces have direction.
-    scalar property direction [
+    scalar property flow [
         domain Interface
-        range Direction
+        range DirectionType
         functional
     ]
 
-    concept Bank < base:IdentifiedElement, PresentingElement, PresentedElement
+    concept InterfaceGroup < base:IdentifiedElement, PresentingElement, PresentedElement [
+        restricts all presents to Interface
+    ]
 
     relation presents [
         from PresentingElement
@@ -107,5 +115,20 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
         irreflexive
     ]
 
+    concept FunctionalGroup < Composable
 
+    concept Configuration < FunctionalGroup
+
+    scalar property configurationId [
+        domain Configuration
+        range xsd:string
+        functional
+    ] < base:hasIdentifier
+
+    @dc:description """Functional groups and components can be composed into other groups or configurations. """
+    relation composes [
+        from FunctionalGroup
+        to Composable 
+    ]
+   
 }
