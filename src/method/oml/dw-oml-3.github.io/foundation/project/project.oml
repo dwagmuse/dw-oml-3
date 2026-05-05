@@ -1,0 +1,20 @@
+@dc:title "Demo Base Vocabulary"
+@dc:description "Base Layer."
+vocabulary <http://dw-oml-3.github.io/foundation/project/project#> as project {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <http://www.w3.org/2001/XMLSchema#> as xsd
+    extends <http://dw-oml-3.github.io/foundation/base/base#> as base
+
+
+    concept Authority < base:IdentifiedElement 
+
+
+    concept Person < base:IdentifiedElement
+
+    // person should have name property
+    scalar property personName [
+        domain Person
+        range xsd:string
+        functional
+    ]
+}

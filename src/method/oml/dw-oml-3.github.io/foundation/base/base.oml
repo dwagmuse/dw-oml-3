@@ -1,0 +1,29 @@
+@dc:title "Demo Base Vocabulary"
+@dc:description "Base Layer."
+vocabulary <http://dw-oml-3.github.io/foundation/base/base#> as base {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <http://www.w3.org/2001/XMLSchema#> as xsd
+
+
+    concept IdentifiedElement
+    
+    scalar property hasCanonicalName [
+        domain IdentifiedElement
+        range xsd:string
+        functional
+    ]
+
+    @dc:description """Can be further specialized for context-specific identifiers which themselves can
+    be functional but the base class cannot be in order to allow one value for each specialization.
+    In general, this SHOULD be specialized for each distinct target class. """
+    scalar property hasIdentifier [
+        domain IdentifiedElement
+        range xsd:string
+    ]
+
+    scalar property hasDescription [
+        domain IdentifiedElement
+        range xsd:string
+        functional
+    ]
+}

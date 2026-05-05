@@ -1,0 +1,51 @@
+@dc:title "Demo Mission Vocabulary"
+@dc:description "Mission Layer."
+vocabulary <http://dw-oml-3.github.io/foundation/mission/mission#> as mission {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <http://www.w3.org/2001/XMLSchema#> as xsd
+	extends <http://dw-oml-3.github.io/foundation/base/base#> as base
+
+
+    aspect PresentingElement
+    aspect PresentedElement
+
+    concept Component < base:IdentifiedElement, PresentingElement
+
+    concept Requirement < base:IdentifiedElement
+
+    concept Interface < base:IdentifiedElement, PresentedElement
+
+    concept Bank < base:IdentifiedElement, PresentingElement, PresentedElement
+
+    relation presents [
+        from PresentingElement
+        to PresentedElement
+        inverse functional
+    ]
+
+    concept Junction < base:IdentifiedElement
+
+    relation joins [
+        from Junction
+        to Interface
+    ]
+
+    // how do I make these specialize base:hasIdentifier?
+    scalar property componentId [
+        domain Component
+        range xsd:string
+        functional
+    ]
+
+    scalar property interfaceId [
+        domain Interface
+        range xsd:string
+        functional
+    ]
+
+    scalar property junctionId [
+        domain Junction
+        range xsd:string
+        functional
+    ]
+}
