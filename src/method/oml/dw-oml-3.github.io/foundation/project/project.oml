@@ -8,13 +8,48 @@ vocabulary <http://dw-oml-3.github.io/foundation/project/project#> as project {
 
     concept Authority < base:IdentifiedElement 
 
+    @dc:description """Determined by rule as root element in a WBS """
+    concept Project < Authority
+
+    relation authorizes [
+        from Authority
+        to Authority
+        inverse functional
+		asymmetric
+		irreflexive
+    ]
+
+    @dc:description """Element in a Work Breakdown or Decomposition describing a separate
+    unit of work that will be allocated to an implementing Organization to supply some
+    Deliverables specified by Requirements. Deliverables may be Components or other 
+    work products (e.g., analysis). The root element in a WBS is referred to as the Project
+    but we don't really need a separate concept name for that (it can be inferred as having
+    no parent).  """
+    concept WorkPackage < Authority [
+        restricts all authorizes to WorkPackage
+    ]
+
+    scalar property hasWPId [
+        domain WorkPackage
+        range xsd:string
+        functional
+    ] < base:hasIdentifier
+
+
+    // relate WP to parent
 
     concept Person < base:IdentifiedElement
 
     // person should have name property
-    scalar property personName [
+    scalar property personId [
         domain Person
         range xsd:string
         functional
-    ]
+    ] < base:hasIdentifier
+
+    @dc:description """Represents implementing organizations or the line in a matrix 
+    organization. All people are provided through Organizations but may have roles in 
+    a WBS """
+    concept Organization < base:IdentifiedElement
+
 }

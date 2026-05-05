@@ -1,13 +1,26 @@
-@dc:title "Demo Mission Vocabulary"
-@dc:description "Mission Layer."
+@dc:title "Demo Functional Electrical Interface Vocabulary"
+@dc:description """Defines types for functional electrical interfaces and canonical
+components that present those interfaces. This focuses on functional signals rather
+than physial connectors. Each functional signal would map to a physical connector/pin
+at a separate realization layer.
+ """
 vocabulary <http://dw-oml-3.github.io/library/electrical#> as electrical {
     extends <http://purl.org/dc/elements/1.1/> as dc
-    extends <http://www.w3.org/2001/XMLSchema#> as xsd
-	extends <http://dw-oml-3.github.io/foundation/base/base#> as base
-    extends <http://dw-oml-3.github.io/foundation/mission/mission#> as mission
+    //extends <http://www.w3.org/2001/XMLSchema#> as xsd
+	//extends <http://dw-oml-3.github.io/foundation/base/base#> as base
+    extends <http://dw-oml-3.github.io/foundation/system/system#> as system
 
-    concept Heater < mission:Component
+    // should we specialize Interface as EndCircuit? Not so important to have this abstraction
+    // if we are going to specialize to lower signal types anyway. 
+    // Multisignal junctions (e.g., power over ethernet where the same wire conducts both
+    // a dc power signal and an ac data signal) should be defined as distinct types
 
-    concept Battery < mission:Component 
+    // needs one PowerIn interface
+    @dc:description """Basically an electrical resistor designed to convert input power to heat. """
+    concept Heater < system:Component
+
+    // needs one PowerInOut interface
+    @dc:description """Energy storage device"""
+    concept Battery < system:Component 
     
 }

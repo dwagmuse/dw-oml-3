@@ -1,6 +1,6 @@
-@dc:title "Demo Mission Vocabulary"
-@dc:description "Mission Layer."
-vocabulary <http://dw-oml-3.github.io/foundation/mission/mission#> as mission {
+@dc:title "Demo System Vocabulary"
+@dc:description "System Layer."
+vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
     extends <http://purl.org/dc/elements/1.1/> as dc
     extends <http://www.w3.org/2001/XMLSchema#> as xsd
 	extends <http://dw-oml-3.github.io/foundation/base/base#> as base
@@ -13,17 +13,42 @@ vocabulary <http://dw-oml-3.github.io/foundation/mission/mission#> as mission {
     @dc:description """An abstract description of the functional purpose"""
     concept Function < base:IdentifiedElement
 
+    relation performs [
+        from Component
+        to Function
+        inverse functional
+    ]
+
     concept Component < base:IdentifiedElement, PresentingElement, PerformingElement
+    scalar property componentId [
+        domain Component
+        range xsd:string
+        functional
+    ] < base:hasIdentifier
 
     concept Requirement < base:IdentifiedElement
+    scalar property requirementId [
+        domain Requirement
+        range xsd:string
+        functional
+    ] < base:hasIdentifier
 
     concept Interface < base:IdentifiedElement, PresentedElement
+
+    scalar property interfaceId [
+        domain Interface
+        range xsd:string
+        functional
+    ] < base:hasIdentifier
 
     @dc:description "Interface Direction."
     scalar Direction [
         oneOf "In", "Out", "InOut"
     ]
 
+    // interfaces can have direction but junctions don't.
+    // the direction of a junction might be inferred from its
+    // interfaces but not all interfaces have direction.
     scalar property direction [
         domain Interface
         range Direction
@@ -45,24 +70,11 @@ vocabulary <http://dw-oml-3.github.io/foundation/mission/mission#> as mission {
         to Interface
     ]
 
-    // how do I make these specialize base:hasIdentifier?
-    scalar property componentId [
-        domain Component
-        range xsd:string
-        functional
-    ]
-
-    scalar property interfaceId [
-        domain Interface
-        range xsd:string
-        functional
-    ]
-
     scalar property junctionId [
         domain Junction
         range xsd:string
         functional
-    ]
+    ] < base:hasIdentifier
 
     // It would be nice to have a more general aspect for functional aggregations or
     // groups that can be nested. We would like to have components that are atomic
@@ -70,11 +82,12 @@ vocabulary <http://dw-oml-3.github.io/foundation/mission/mission#> as mission {
     by coordinating the functions of aggregated components.  """
     concept Subsystem < PerformingElement
 
-    scalar property subsystemId [
+    scalar property hasSubsystemId [
         domain Subsystem
         range xsd:string
-    ]
-
+        functional
+    ] < base:hasIdentifier 
+    
     @dc:description """Relates a junction to an individual component.
     If junction is also joined to a subsystem the target component must be a member of the target subsystem. """
     relation connectsComponent [
