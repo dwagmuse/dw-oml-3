@@ -1,0 +1,13 @@
+@dc:title "Demo Mission Vocabulary"
+@dc:description "Mission Layer."
+vocabulary <http://dw-oml-3.github.io/library/electrical#> as electrical {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    extends <http://www.w3.org/2001/XMLSchema#> as xsd
+	extends <http://dw-oml-3.github.io/foundation/base/base#> as base
+    extends <http://dw-oml-3.github.io/foundation/mission/mission#> as mission
+
+    concept Heater < mission:Component
+
+    concept Battery < mission:Component 
+    
+}

@@ -7,6 +7,8 @@ vocabulary <http://dw-oml-3.github.io/foundation/base/base#> as base {
 
     concept IdentifiedElement
     
+    @dc:description """A canonical name is a common name but not a key identifier.
+    Use this for a human-readable label.  """
     scalar property hasCanonicalName [
         domain IdentifiedElement
         range xsd:string
