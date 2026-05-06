@@ -24,6 +24,8 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
 
     concept Composable < PerformingElement, base:IdentifiedElement
 
+    @dc:description """A physical deliverable unit of functionality. Can even include software if the
+    as long as there is some specified form for the deliverable."""
     concept Component < PresentingElement, Composable
 
     scalar property componentId [
