@@ -1,5 +1,5 @@
-@dc:title "Subsystem list"
-@dc:description "Subsystems"
+@dc:title "Workpackage list"
+@dc:description "Work packages"
 description <http://dw-oml-3.github.io/workpackages#> as wp {
     uses <http://purl.org/dc/elements/1.1/> as dc
     //uses <http://www.w3.org/2001/XMLSchema#> as xsd
