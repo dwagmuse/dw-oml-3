@@ -36,13 +36,17 @@ vocabulary <http://dw-oml-3.github.io/library/electrical/interfaces#> as eeif {
     // include modes for worst case conditions that you wouldn't otherwise use for nominal supply/demand
     // balancing.
 
+    @dc:description """All connections of this class have the primary purpose of supplying power to loads. """
     concept SupplyPower < system:Junction [
         restricts all system:joins to PowerEndCircuit
     ]
 
-    // composes multiple channels we will not model here. Different channels have different directionality
-    // but the composition is not specified and is implicitly bidirectional
-    concept RS422EndCircuit < EndCircuit
+
+    @dc:description "base power interface. Can also be used for ambiguous or birirectional flows"
+    concept DataEndCircuit < EndCircuit
+
+    @dc:description "Base type for all data channels"
+    concept RS422EndCircuit < DataEndCircuit
 
     concept RS422Comm < system:Junction [
         restricts all system:joins to RS422EndCircuit

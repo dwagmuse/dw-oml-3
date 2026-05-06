@@ -1,0 +1,30 @@
+@dc:title "Demo Functional Electrical Interface Vocabulary"
+@dc:description """Defines types for functional electrical interfaces and canonical
+components that present those interfaces. This focuses on functional signals rather
+than physial connectors. Each functional signal would map to a physical connector/pin
+at a separate realization layer.
+ """
+vocabulary <http://dw-oml-3.github.io/library/fluid/interfaces#> as ffif {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    //extends <http://www.w3.org/2001/XMLSchema#> as xsd
+	//extends <http://dw-oml-3.github.io/foundation/base/base#> as base
+    extends <http://dw-oml-3.github.io/foundation/system/system#> as system
+
+
+    concept FluidInterface < system:Interface
+
+    @dc:description "Generic fluid output interface (a source)"
+	concept FluidSource < FluidInterface [
+		restricts system:flow to "out"
+    ]
+
+    @dc:description "Generic fluid output interface (a source)"
+	concept FluidSink < FluidInterface [
+		restricts system:flow to "in"
+    ]
+
+    @dc:description """All connections of this class have the primary purpose of conducting fluid flow. """
+    concept FluidFlow < system:Junction [
+        restricts all system:joins to FluidInterface
+    ]
+}

@@ -71,6 +71,10 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
         inverse functional
     ]
 
+    @dc:description """A Junction represents a functional connection between Interfaces presented by Components.
+    Usually, one junction exists to help perform a single system function by facilitating the delivery of some s
+    ignal or material. Can be specialized to also describe the signal or material but that can also get into
+    design details that may not be relevant at the system level."""
     concept Junction < base:IdentifiedElement
 
     relation joins [
@@ -131,4 +135,10 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
         to Composable 
     ]
    
+   // Some other relations to consider:
+   // * pass-through from Junction to Component relates a junction to a component that it passes through 
+   //  but does not terminate within. This may not be necessary if a junction can have multiple ends or can exist
+   //  in multiple segments. e.g., a signal to power a safety-critical device may pass through a serial safety
+   //. switch. The switch is in the circuit and is delivered as a separate component with its own logical and
+   //  physical interfaces. The junction may involve two segments of harness. 
 }
