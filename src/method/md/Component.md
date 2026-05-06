@@ -38,7 +38,7 @@ stylesheet:
 ---
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX oml: <http://opencaesar.io/oml#>
-PREFIX schema: <http://dw-oml-2.github.io/discipline/vnv/vnv#>
+PREFIX schema: <http://dw-oml-3.github.io/foundation/system/system#>
 
 SELECT ?g ?Property (GROUP_CONCAT(?Value; separator=", ") AS ?Values)
 WHERE {
