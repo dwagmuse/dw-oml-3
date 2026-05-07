@@ -6,15 +6,15 @@ description <http://dw-oml-3.github.io/components#> as cmp {
     uses <http://dw-oml-3.github.io/foundation/base/base#> as base
     //uses <http://dw-oml-3.github.io/foundation/project/project#> as project
     uses <http://dw-oml-3.github.io/foundation/system/system#> as sys
-    uses <http://dw-oml-3.github.io/library/electrical/components#> as ee
+    uses <http://dw-oml-3.github.io/library/power/components#> as pwr
 
-    instance CMP_1 : sys:Component [
-        base:hasCanonicalName "Simple Base Component"
-        sys:componentId "NOSUB_FOO"
+    instance CMP_1 : pwr:3PhaseMotor [
+        base:hasCanonicalName "Drive motor"
+        sys:componentId "M_FOO"
     ]
 
-    instance CMP_2 : ee:Heater [
+    instance CMP_2 : pwr:Heater [
         base:hasCanonicalName "Heater 1"
-        sys:componentId "Heater1"
+        sys:componentId "Heater_1"
     ]
 }

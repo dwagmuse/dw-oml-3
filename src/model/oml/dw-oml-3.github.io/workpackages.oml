@@ -2,13 +2,26 @@
 @dc:description "Work packages"
 description <http://dw-oml-3.github.io/workpackages#> as wp {
     uses <http://purl.org/dc/elements/1.1/> as dc
-    //uses <http://www.w3.org/2001/XMLSchema#> as xsd
     uses <http://dw-oml-3.github.io/foundation/base/base#> as base
     uses <http://dw-oml-3.github.io/foundation/project/project#> as project
-    //uses <http://dw-oml-3.github.io/foundation/system/system#> as system
+    //extends <http://dw-oml-3.github.io/components#> as components
+    extends <http://dw-oml-3.github.io/ss#> as ss
 
     instance WP_1 : project:WorkPackage [
         project:hasWPId "001 POWER"
         base:hasCanonicalName "Power Workpackage"
+        project:delivers ss:SS_POWER
+    ]
+
+    instance WP_2 : project:WorkPackage [
+        base:hasCanonicalName "Telecom Subsystem"
+        project:hasWPId "TELECOM"
+        project:delivers ss:SS_TELECOM
+    ]
+
+    instance WP_3 : project:WorkPackage [
+        base:hasCanonicalName "Propulsion Subsystem"
+        project:hasWPId "PROP"
+        project:delivers ss:SS_PROP
     ]
 }

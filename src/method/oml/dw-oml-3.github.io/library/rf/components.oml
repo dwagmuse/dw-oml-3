@@ -1,0 +1,18 @@
+@dc:title "Demo Functional Microwave waveguide Interface Vocabulary"
+@dc:description """Defines types for microwave waveguide elements and other
+radion-frequency types.
+ """
+vocabulary <http://dw-oml-3.github.io/library/rf/components#> as rf {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    //extends <http://www.w3.org/2001/XMLSchema#> as xsd
+	//extends <http://dw-oml-3.github.io/foundation/base/base#> as base
+    extends <http://dw-oml-3.github.io/foundation/system/system#> as system
+
+    concept Antenna < system:Component
+
+    concept HGA < Antenna
+
+    concept Diplexer < system:Component
+
+    concept WaveguideSwitch < system:Component
+}

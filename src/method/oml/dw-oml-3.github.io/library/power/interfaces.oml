@@ -1,0 +1,64 @@
+@dc:title "Demo Functional Electrical Interface Vocabulary"
+@dc:description """Defines types for functional electrical interfaces and canonical
+components that present those interfaces. This focuses on functional signals rather
+than physial connectors. Each functional signal would map to a physical connector/pin
+at a separate realization layer.
+ """
+vocabulary <http://dw-oml-3.github.io/library/power/interfaces#> as powerif {
+    extends <http://purl.org/dc/elements/1.1/> as dc
+    //extends <http://www.w3.org/2001/XMLSchema#> as xsd
+	//extends <http://dw-oml-3.github.io/foundation/base/base#> as base
+    extends <http://dw-oml-3.github.io/foundation/system/system#> as system
+
+    @dc:description "base power interface. Can also be used for ambiguous or birirectional flows"
+    concept PowerEndCircuit < system:Interface
+
+    concept PowerBank < system:InterfaceGroup [
+        restricts all system:presents to PowerEndCircuit
+    ]
+
+    @dc:description "Generic power output interface (a source)"
+	concept PowerSource < PowerEndCircuit [
+		restricts system:flow to "out"
+    ]
+
+    @dc:description "Generalizaton for all Power Switches having a current rating property"
+	concept PowerSwitch < PowerSource
+
+    @dc:description "Generic power input interface (a load)"
+	concept PowerLoad < PowerEndCircuit [
+		restricts system:flow to "in"
+    ]
+    // loads can have specific demand properties such as min voltage, max current, power demand needed to
+    // specify junction wires. Those are probably distinct from modal behavioral characterizations unless you 
+    // include modes for worst case conditions that you wouldn't otherwise use for nominal supply/demand
+    // balancing.
+
+    @dc:description """All connections of this class have the primary purpose of supplying power to loads. """
+    concept SupplyPower < system:Junction [
+        restricts all system:joins to PowerEndCircuit
+    ]
+
+    concept DCPowerEndCircuit < PowerEndCircuit
+    concept DCPowerLoad < PowerLoad
+    concept DCPowerSource < PowerSource
+    concept SupplyDCPower < SupplyPower [
+        restricts all system:joins to DCPowerEndCircuit
+    ]
+
+    concept ACPowerEndCircuit < PowerEndCircuit
+    concept ACPowerLoad < PowerLoad
+    concept ACPowerSource < PowerSource
+    concept SupplyACPower < SupplyPower [
+        restricts all system:joins to ACPowerEndCircuit
+    ]
+
+    concept 3PhasePowerEndCircuit < ACPowerEndCircuit
+    concept 3PhasePowerLoad < ACPowerLoad
+    concept 3PhasePowerSource < ACPowerSource
+    concept Supply3PhasePower < SupplyPower [
+        restricts all system:joins to 3PhasePowerEndCircuit
+    ]
+
+   
+}

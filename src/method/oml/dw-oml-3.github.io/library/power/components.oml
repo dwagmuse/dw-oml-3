@@ -4,7 +4,7 @@ components that present those interfaces. This focuses on functional signals rat
 than physial connectors. Each functional signal would map to a physical connector/pin
 at a separate realization layer.
  """
-vocabulary <http://dw-oml-3.github.io/library/electrical/components#> as ee {
+vocabulary <http://dw-oml-3.github.io/library/power/components#> as power {
     extends <http://purl.org/dc/elements/1.1/> as dc
     //extends <http://www.w3.org/2001/XMLSchema#> as xsd
 	//extends <http://dw-oml-3.github.io/foundation/base/base#> as base

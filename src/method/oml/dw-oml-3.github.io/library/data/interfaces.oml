@@ -4,46 +4,14 @@ components that present those interfaces. This focuses on functional signals rat
 than physial connectors. Each functional signal would map to a physical connector/pin
 at a separate realization layer.
  """
-vocabulary <http://dw-oml-3.github.io/library/electrical/interfaces#> as eeif {
+vocabulary <http://dw-oml-3.github.io/library/data/interfaces#> as dataif {
     extends <http://purl.org/dc/elements/1.1/> as dc
     //extends <http://www.w3.org/2001/XMLSchema#> as xsd
 	//extends <http://dw-oml-3.github.io/foundation/base/base#> as base
     extends <http://dw-oml-3.github.io/foundation/system/system#> as system
 
-    concept EndCircuit < system:Interface
-
-    concept Bank < system:InterfaceGroup [
-        restricts all system:presents to EndCircuit
-    ]
-
     @dc:description "base power interface. Can also be used for ambiguous or birirectional flows"
-    concept PowerEndCircuit < EndCircuit
-
-    @dc:description "Generic power output interface (a source)"
-	concept PowerSource < PowerEndCircuit [
-		restricts system:flow to "out"
-    ]
-
-    @dc:description "Generalizaton for all Power Switches having a current rating property"
-	concept PowerSwitch < PowerSource
-
-    @dc:description "Generic power input interface (a load)"
-	concept PowerLoad < PowerEndCircuit [
-		restricts system:flow to "in"
-    ]
-    // loads can have specific demand properties such as min voltage, max current, power demand needed to
-    // specify junction wires. Those are probably distinct from modal behavioral characterizations unless you 
-    // include modes for worst case conditions that you wouldn't otherwise use for nominal supply/demand
-    // balancing.
-
-    @dc:description """All connections of this class have the primary purpose of supplying power to loads. """
-    concept SupplyPower < system:Junction [
-        restricts all system:joins to PowerEndCircuit
-    ]
-
-
-    @dc:description "base power interface. Can also be used for ambiguous or birirectional flows"
-    concept DataEndCircuit < EndCircuit
+    concept DataEndCircuit < system:Interface
 
     @dc:description "Base type for all data channels"
     concept RS422EndCircuit < DataEndCircuit

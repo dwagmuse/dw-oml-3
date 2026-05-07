@@ -23,10 +23,15 @@ pp:WPShape
         sh:maxcount 1 ;
     ] ;
     sh:property [
-        sh:path pp:hasWPID ;
+        sh:path pp:hasWPId ;
         sh:name "ID" ;
         sh:maxcount 1 ;
-    ] 
+    ] ;
+    sh:property [
+        sh:path pp:delivers ;
+        sh:name "delivers" ;
+        sh:class pp:Deliverable ;
+    ]
     .
 ```
 

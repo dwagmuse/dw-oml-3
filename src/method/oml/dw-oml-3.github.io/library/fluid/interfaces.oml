@@ -27,4 +27,9 @@ vocabulary <http://dw-oml-3.github.io/library/fluid/interfaces#> as ffif {
     concept FluidFlow < system:Junction [
         restricts all system:joins to FluidInterface
     ]
+
+    // FluidFlow can be further specialized for distinct fluid classes that you need to keep separated.
+    // E.g., in a chemical propulsion system you might want to model propellant, oxidizer, and pressurant as distinct
+    // classes of fluid to ensure that interfaces are matched even if the physical realizations of those lines are all
+    // the same.
 }
