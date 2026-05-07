@@ -7,7 +7,7 @@ template:
     - kind: navigation
       match:
         anyTypeOf: 
-          - http://dw-oml-3.github.io/foundation/system/system/Interface
+          - http://dw-oml-3.github.io/foundation/system/system#Interface
   params:
     - id: member
       type: iri

@@ -24,7 +24,7 @@ ss:SSShape
         sh:maxcount 1 ;
     ] ;
     sh:property [
-        sh:path ss:hasSubsystemId ;
+        sh:path ss:subsystemId ;
         sh:name "ID" ;
         sh:maxcount 1 ;
     ] 

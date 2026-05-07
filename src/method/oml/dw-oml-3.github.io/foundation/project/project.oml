@@ -29,6 +29,17 @@ vocabulary <http://dw-oml-3.github.io/foundation/project/project#> as project {
         restricts all authorizes to WorkPackage
     ]
 
+    @dc:description """A deliverable """
+    aspect Deliverable
+
+    @dc:description """Indicates a work responsibility to produce and deliver the subject. Was 'supplies' in openCAESAR."""
+    relation delivers [
+        from WorkPackage
+        to Deliverable
+        reverse supplies
+        inverse functional
+    ]
+
     scalar property hasWPId [
         domain WorkPackage
         range xsd:string

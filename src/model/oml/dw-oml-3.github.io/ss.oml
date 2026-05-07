@@ -11,11 +11,11 @@ description <http://dw-oml-3.github.io/ss#> as ss {
 
     instance SS_POWER : sys:Subsystem [
         base:hasCanonicalName "Power Subsystem"
-        sys:hasSubsystemId "POWER"
+        sys:subsystemId "POWER"
     ]
 
     instance SS_PROP : sys:Subsystem [
         base:hasCanonicalName "Propulsion Subsystem"
-        sys:hasSubsystemId "PROP"
+        sys:subsystemId "PROP"
     ]
 }

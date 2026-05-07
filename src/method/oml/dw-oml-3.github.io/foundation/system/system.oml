@@ -4,7 +4,7 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
     extends <http://purl.org/dc/elements/1.1/> as dc
     extends <http://www.w3.org/2001/XMLSchema#> as xsd
 	extends <http://dw-oml-3.github.io/foundation/base/base#> as base
-
+    extends <http://dw-oml-3.github.io/foundation/project/project#> as project
 
     @dc:description "Element that can present an interface"
     aspect PresentingElement
@@ -26,7 +26,7 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
 
     @dc:description """A physical deliverable unit of functionality. Can even include software if the
     as long as there is some specified form for the deliverable."""
-    concept Component < PresentingElement, Composable
+    concept Component < PresentingElement, Composable, project:Deliverable
 
     scalar property componentId [
         domain Component
@@ -94,9 +94,9 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
     // groups that can be nested. We would like to have components that are atomic
     @dc:description """A subsystem is a virtual component that can perform functions
     by coordinating the functions of aggregated components.  """
-    concept Subsystem < PerformingElement
+    concept Subsystem < PerformingElement, project:Deliverable
 
-    scalar property hasSubsystemId [
+    scalar property subsystemId [
         domain Subsystem
         range xsd:string
         functional
