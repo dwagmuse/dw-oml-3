@@ -11,10 +11,8 @@
   </tr>
 </table>
 
-## Bare Components
+## Components
 
-This table only allows creationt of base class components
-without interfaces.
 
 <table style="width: 100%; background-color: rgba(255, 50, 50, 0.1);">
   <tr>

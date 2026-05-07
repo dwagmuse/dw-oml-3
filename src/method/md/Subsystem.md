@@ -20,6 +20,19 @@ template:
 ---
 # [[${member}]]
 
+## Description
+
+```text
+PREFIX base: <https://dw-oml-3.github.io/foundation/base/base#>
+
+SELECT ?description
+WHERE {
+    GRAPH ?g {
+        <${member}> base:hasDescription ?description .
+    }
+}
+```
+
 ## Properties
 
 ```table

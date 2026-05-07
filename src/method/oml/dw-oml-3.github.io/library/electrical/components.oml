@@ -8,14 +8,22 @@ vocabulary <http://dw-oml-3.github.io/library/electrical/components#> as ee {
     extends <http://purl.org/dc/elements/1.1/> as dc
     //extends <http://www.w3.org/2001/XMLSchema#> as xsd
 	//extends <http://dw-oml-3.github.io/foundation/base/base#> as base
-    extends <http://dw-oml-3.github.io/foundation/system/system#> as system
+    extends <http://dw-oml-3.github.io/foundation/system/system#> as sys
 
         // needs one PowerIn interface
     @dc:description """Basically an electrical resistor designed to convert input power to heat. """
-    concept Heater < system:Component
+    concept Heater < sys:Component
 
     // needs one PowerInOut interface
     @dc:description """Energy storage device"""
-    concept Battery < system:Component 
+    concept Battery < sys:Component 
     
+    @dc:description """Requires DC power"""
+    concept DCMotor < sys:Component 
+
+    @dc:description """Requires AC power"""
+    concept ACMotor < sys:Component 
+
+    @dc:description """Requires 3-phase AC power"""
+    concept 3PhaseMotor < sys:Component 
 }

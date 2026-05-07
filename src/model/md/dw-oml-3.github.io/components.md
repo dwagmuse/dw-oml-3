@@ -17,7 +17,7 @@ SELECT ?iri ?name ?id
 
 WHERE {
     ?iri a ss:Component ;
-        base:hasCanonnicalName ?name ;
+        base:hasCanonicalName ?name ;
         ss:componentId ?id  .        
 }
 

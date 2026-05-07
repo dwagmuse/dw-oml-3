@@ -5,17 +5,17 @@ description <http://dw-oml-3.github.io/ss#> as ss {
     //uses <http://www.w3.org/2001/XMLSchema#> as xsd
     uses <http://dw-oml-3.github.io/foundation/base/base#> as base
     //uses <http://dw-oml-3.github.io/foundation/project/project#> as project
-    uses <http://dw-oml-3.github.io/foundation/system/system#> as system
+    uses <http://dw-oml-3.github.io/foundation/system/system#> as sys
 
     // TODO: extend supplies relation from WorkPackage
 
-    instance SS_POWER : system:Subsystem [
+    instance SS_POWER : sys:Subsystem [
         base:hasCanonicalName "Power Subsystem"
-        system:hasSubsystemId "POWER"
+        sys:hasSubsystemId "POWER"
     ]
 
-    instance SS_PROP : system:Subsystem [
+    instance SS_PROP : sys:Subsystem [
         base:hasCanonicalName "Propulsion Subsystem"
-        system:hasSubsystemId "PROP"
+        sys:hasSubsystemId "PROP"
     ]
 }

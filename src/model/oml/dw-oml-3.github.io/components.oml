@@ -5,16 +5,16 @@ description <http://dw-oml-3.github.io/components#> as cmp {
     uses <http://purl.org/dc/elements/1.1/> as dc
     uses <http://dw-oml-3.github.io/foundation/base/base#> as base
     //uses <http://dw-oml-3.github.io/foundation/project/project#> as project
-    uses <http://dw-oml-3.github.io/foundation/system/system#> as system
+    uses <http://dw-oml-3.github.io/foundation/system/system#> as sys
     uses <http://dw-oml-3.github.io/library/electrical/components#> as ee
 
-    instance CMP_1 : system:Component [
+    instance CMP_1 : sys:Component [
         base:hasCanonicalName "Simple Base Component"
-        system:componentId "NOSUB_FOO"
+        sys:componentId "NOSUB_FOO"
     ]
 
     instance CMP_2 : ee:Heater [
         base:hasCanonicalName "Heater 1"
-        system:componentId "Heater1"
+        sys:componentId "Heater1"
     ]
 }
