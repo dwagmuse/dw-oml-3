@@ -20,7 +20,9 @@ description <http://dw-oml-3.github.io/junctions#> as junctions {
         sys:joins cmp:CMP_4_PO1
         // This should be inconsistent!
         // should only be able to join this type of junction
-        // to a DC end circuit but this one is 3PhaseAC
+        // to a DC end circuit but this one is 3PhaseAC.
+        // This junction should restrict joins to only DCEndCircuit but
+        // this interface is typed as 3PhaseLoad which should violate the restriction
         sys:joins cmp:CMP_1_PIN1
     ]
 }
