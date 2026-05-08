@@ -30,4 +30,35 @@ description <http://dw-oml-3.github.io/components#> as cmp {
         sys:presentedBy CMP_2
     ]
 
+    instance CMP_3 : sys:Component [
+        base:hasCanonicalName "MC 1"
+        sys:componentId "MC_1"
+        sys:composedIn ss:SS_MOBILITY
+        base:hasDescription "Motor controller"
+    ]
+    instance CMP_3_PIN1 : powerif:DCPowerLoad [
+        sys:presentedBy CMP_3
+    ]
+    instance CMP_3_M1 : powerif:3PhasePowerSource [
+        sys:presentedBy CMP_3
+    ]
+
+    instance CMP_4 : sys:Component [
+        base:hasCanonicalName "PC 1"
+        sys:componentId "PC_1"
+        sys:composedIn ss:SS_POWER
+        base:hasDescription "Power Distribution"
+    ]
+    instance CMP_4_PO1 : powerif:DCPowerSource [
+        sys:presentedBy CMP_4
+    ]
+    instance CMP_4_PO2 : powerif:DCPowerSource [
+        sys:presentedBy CMP_4
+    ]
+    instance CMP_4_PO3 : powerif:DCPowerSource [
+        sys:presentedBy CMP_4
+    ]
+    instance CMP_4_PO4 : powerif:DCPowerSource [
+        sys:presentedBy CMP_4
+    ]
 }

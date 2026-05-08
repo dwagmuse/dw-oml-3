@@ -4,10 +4,23 @@ description <http://dw-oml-3.github.io/junctions#> as junctions {
     uses <http://purl.org/dc/elements/1.1/> as dc
     //uses <http://dw-oml-3.github.io/foundation/base/base#> as base
     //uses <http://dw-oml-3.github.io/foundation/project/project#> as project
-    //uses <http://dw-oml-3.github.io/foundation/system/system#> as sys
-    //uses <http://dw-oml-3.github.io/library/power/components#> as pwr
+    uses <http://dw-oml-3.github.io/foundation/system/system#> as sys
+    uses <http://dw-oml-3.github.io/library/power/interfaces#> as pwrif
 
-    //extends <http://dw-oml-3.github.io/components#> as cmp
+    extends <http://dw-oml-3.github.io/components#> as cmp
 
+    instance JMC1 : pwrif:Supply3PhasePower [
+        sys:joins cmp:CMP_1_PIN1
+        sys:joins cmp:CMP_3_M1
+        sys:junctionId "JMC1"
+    ]
 
+    instance JP1 : pwrif:SupplyDCPower [
+        sys:junctionId "JPC1"
+        sys:joins cmp:CMP_4_PO1
+        // This should be inconsistent!
+        // should only be able to join this type of junction
+        // to a DC end circuit but this one is 3PhaseAC
+        sys:joins cmp:CMP_1_PIN1
+    ]
 }
