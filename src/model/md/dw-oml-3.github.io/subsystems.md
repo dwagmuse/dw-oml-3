@@ -27,7 +27,11 @@ ss:SSShape
         sh:path ss:subsystemId ;
         sh:name "ID" ;
         sh:maxcount 1 ;
-    ] 
+    ] ;
+    sh:property [
+        sh:path ss:composes ;
+        sh:name "Parts" ;
+    ]
     .
 ```
 

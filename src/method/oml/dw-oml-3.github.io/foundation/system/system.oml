@@ -24,6 +24,8 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
 
     concept Composable < PerformingElement, base:IdentifiedElement
 
+    aspect Composition
+
     @dc:description """A physical deliverable unit of functionality. Can even include software if the
     as long as there is some specified form for the deliverable."""
     concept Component < PresentingElement, Composable, project:Deliverable
@@ -70,6 +72,7 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
     relation presents [
         from PresentingElement
         to PresentedElement
+        reverse presentedBy
         inverse functional
     ]
 
@@ -94,7 +97,7 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
     // groups that can be nested. We would like to have components that are atomic
     @dc:description """A subsystem is a virtual component that can perform functions
     by coordinating the functions of aggregated components.  """
-    concept Subsystem < PerformingElement, project:Deliverable
+    concept Subsystem < PerformingElement, project:Deliverable, Composition
 
     scalar property subsystemId [
         domain Subsystem
@@ -121,7 +124,7 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
         irreflexive
     ]
 
-    concept FunctionalGroup < Composable
+    concept FunctionalGroup < Composable, Composition
 
     concept Configuration < FunctionalGroup
 
@@ -133,8 +136,9 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
 
     @dc:description """Functional groups and components can be composed into other groups or configurations. """
     relation composes [
-        from FunctionalGroup
+        from Composition
         to Composable 
+        reverse composedIn
     ]
    
    // Some other relations to consider:

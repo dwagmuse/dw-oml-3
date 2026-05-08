@@ -11,14 +11,21 @@ a common base type
 columns: { iri: { label: "element"} }
 ---
 PREFIX base: <http://dw-oml-3.github.io/foundation/base/base#> 
-PREFIX ss: <http://dw-oml-3.github.io/foundation/system/system#> 
+PREFIX sys: <http://dw-oml-3.github.io/foundation/system/system#> 
 
-SELECT ?iri ?name ?id
+SELECT ?iri ?name ?id ?if ?subs
 
 WHERE {
-    ?iri a ss:Component ;
+    ?iri a sys:Component ;
         base:hasCanonicalName ?name ;
-        ss:componentId ?id  .        
+        sys:componentId ?id  .
+
+       ?subs sys:composes ?iri .
+
+    OPTIONAL {
+        ?iri sys:presents ?if .  
+    }
+              
 }
 
 ```

@@ -2,13 +2,9 @@
 @dc:description "Subsystems"
 description <http://dw-oml-3.github.io/ss#> as ss {
     uses <http://purl.org/dc/elements/1.1/> as dc
-    //uses <http://www.w3.org/2001/XMLSchema#> as xsd
     uses <http://dw-oml-3.github.io/foundation/base/base#> as base
-    //uses <http://dw-oml-3.github.io/foundation/project/project#> as project
     uses <http://dw-oml-3.github.io/foundation/system/system#> as sys
-
-    // TODO: extend supplies relation from WorkPackage
-
+    
     instance SS_POWER : sys:Subsystem [
         base:hasCanonicalName "Power Subsystem"
         sys:subsystemId "POWER"
@@ -17,5 +13,20 @@ description <http://dw-oml-3.github.io/ss#> as ss {
     instance SS_PROP : sys:Subsystem [
         base:hasCanonicalName "Propulsion Subsystem"
         sys:subsystemId "PROP"
+    ]
+
+    instance SS_TELECOM : sys:Subsystem [
+        base:hasCanonicalName "Telecom Subsystem"
+        sys:subsystemId "TELECOM"
+    ]
+
+    instance SS_MOBILITY : sys:Subsystem [
+        base:hasCanonicalName "Mobility Subsystem"
+        sys:subsystemId "MOBILITY"
+    ]
+
+    instance SS_THERMAL : sys:Subsystem [
+        base:hasCanonicalName "Thermal Subsystem"
+        sys:subsystemId "THERM"
     ]
 }

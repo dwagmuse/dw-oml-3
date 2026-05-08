@@ -8,13 +8,26 @@ description <http://dw-oml-3.github.io/components#> as cmp {
     uses <http://dw-oml-3.github.io/foundation/system/system#> as sys
     uses <http://dw-oml-3.github.io/library/power/components#> as pwr
 
+	uses <http://dw-oml-3.github.io/library/power/interfaces#> as powerif
+
+    extends <http://dw-oml-3.github.io/ss#> as ss
+
     instance CMP_1 : pwr:3PhaseMotor [
         base:hasCanonicalName "Drive motor"
-        sys:componentId "M_FOO"
+        sys:componentId "Motor_1"
+        sys:composedIn ss:SS_MOBILITY
+    ]
+    instance CMP_1_PIN1 : powerif:3PhasePowerLoad [
+        sys:presentedBy CMP_1
     ]
 
     instance CMP_2 : pwr:Heater [
         base:hasCanonicalName "Heater 1"
         sys:componentId "Heater_1"
+        sys:composedIn ss:SS_THERMAL
     ]
+    instance CMP_2_PIN1 : powerif:DCPowerLoad [
+        sys:presentedBy CMP_2
+    ]
+
 }
