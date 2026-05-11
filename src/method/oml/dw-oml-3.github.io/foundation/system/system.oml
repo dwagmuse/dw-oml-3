@@ -97,7 +97,7 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
     // groups that can be nested. We would like to have components that are atomic
     @dc:description """A subsystem is a virtual component that can perform functions
     by coordinating the functions of aggregated components.  """
-    concept Subsystem < PerformingElement, project:Deliverable, Composition
+    concept Subsystem < PerformingElement, base:IdentifiedElement, project:Deliverable, Composition
 
     scalar property subsystemId [
         domain Subsystem

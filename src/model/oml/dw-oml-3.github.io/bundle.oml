@@ -1,0 +1,12 @@
+@dc:title "Model Bundle"
+@dc:description "A bundle that includes all descriptions in the project."
+description bundle <http://dw-oml-3.github.io/bundle#> as d-bundle {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <http://dw-oml-3.github.io/library/bundle#>
+
+    includes <http://dw-oml-3.github.io/ss#>
+    includes <http://dw-oml-3.github.io/workpackages#>
+    includes <http://dw-oml-3.github.io/components#>
+    includes <http://dw-oml-3.github.io/junctions#>
+
+ }

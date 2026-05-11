@@ -22,8 +22,7 @@ vocabulary <http://dw-oml-3.github.io/library/power/interfaces#> as powerif {
 		restricts system:flow to "out"
     ]
 
-    @dc:description "Generalizaton for all Power Switches having a current rating property"
-	concept PowerSwitch < PowerSource
+ 
 
     @dc:description "Generic power input interface (a load)"
 	concept PowerLoad < PowerEndCircuit [
@@ -40,22 +39,36 @@ vocabulary <http://dw-oml-3.github.io/library/power/interfaces#> as powerif {
     ]
 
     concept DCPowerEndCircuit < PowerEndCircuit
-    concept DCPowerLoad < PowerLoad
-    concept DCPowerSource < PowerSource
+    concept DCPowerLoad < DCPowerEndCircuit [
+        restricts system:flow to "in"
+    ]
+    concept DCPowerSource < DCPowerEndCircuit [
+        restricts system:flow to "out"
+    ]
     concept SupplyDCPower < SupplyPower [
         restricts all system:joins to DCPowerEndCircuit
     ]
+    @dc:description "Generalizaton for all Power Switches having a current rating property"
+	concept PowerSwitch < DCPowerSource
 
     concept ACPowerEndCircuit < PowerEndCircuit
-    concept ACPowerLoad < PowerLoad
-    concept ACPowerSource < PowerSource
+    concept ACPowerLoad < ACPowerEndCircuit [
+        restricts system:flow to "in"
+    ]
+    concept ACPowerSource < ACPowerEndCircuit [
+        restricts system:flow to "out"
+    ]
     concept SupplyACPower < SupplyPower [
         restricts all system:joins to ACPowerEndCircuit
     ]
 
-    concept 3PhasePowerEndCircuit < ACPowerEndCircuit
-    concept 3PhasePowerLoad < ACPowerLoad
-    concept 3PhasePowerSource < ACPowerSource
+    concept 3PhasePowerEndCircuit < ACPowerEndCircuit 
+    concept 3PhasePowerLoad < 3PhasePowerEndCircuit [
+        restricts system:flow to "in"
+    ]
+    concept 3PhasePowerSource < 3PhasePowerEndCircuit [
+        restricts system:flow to "out"
+    ]
     concept Supply3PhasePower < SupplyPower [
         restricts all system:joins to 3PhasePowerEndCircuit
     ]

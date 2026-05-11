@@ -9,6 +9,8 @@ description <http://dw-oml-3.github.io/junctions#> as junctions {
 
     extends <http://dw-oml-3.github.io/components#> as cmp
 
+	uses <http://dw-oml-3.github.io/foundation/base/base#> as base
+
     instance JMC1 : pwrif:Supply3PhasePower [
         sys:joins cmp:CMP_1_PIN1
         sys:joins cmp:CMP_3_M1
@@ -16,13 +18,10 @@ description <http://dw-oml-3.github.io/junctions#> as junctions {
     ]
 
     instance JP1 : pwrif:SupplyDCPower [
+        base:hasDescription "DC power to motor controller "
         sys:junctionId "JPC1"
         sys:joins cmp:CMP_4_PO1
-        // This should be inconsistent!
-        // should only be able to join this type of junction
-        // to a DC end circuit but this one is 3PhaseAC.
-        // This junction should restrict joins to only DCEndCircuit but
-        // this interface is typed as 3PhaseLoad which should violate the restriction
-        sys:joins cmp:CMP_1_PIN1
+    
+        sys:joins cmp:CMP_3_PIN1
     ]
 }

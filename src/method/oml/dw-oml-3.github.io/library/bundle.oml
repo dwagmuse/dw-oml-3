@@ -1,0 +1,19 @@
+@dc:title "Vocabulary bundle"
+@dc:description "A packaging bundle that includes all vocabularies for the interface model."
+vocabulary bundle <http://dw-oml-3.github.io/library/bundle#> as v-bundle {
+    includes <http://purl.org/dc/elements/1.1/> as dc
+
+    includes <http://dw-oml-3.github.io/library/data/interfaces#>
+    includes <http://dw-oml-3.github.io/library/data/components#>
+
+    includes <http://dw-oml-3.github.io/library/fluid/interfaces#>
+    includes <http://dw-oml-3.github.io/library/fluid/components#>
+
+    includes <http://dw-oml-3.github.io/library/power/interfaces#>
+    includes <http://dw-oml-3.github.io/library/power/components#>
+
+    includes <http://dw-oml-3.github.io/library/rf/interfaces#>
+    includes <http://dw-oml-3.github.io/library/rf/components#>
+}
+
+  
