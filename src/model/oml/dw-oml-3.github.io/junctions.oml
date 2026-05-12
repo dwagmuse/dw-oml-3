@@ -7,6 +7,7 @@ description <http://dw-oml-3.github.io/junctions#> as junctions {
     uses <http://dw-oml-3.github.io/foundation/system/system#> as sys
     uses <http://dw-oml-3.github.io/library/power/interfaces#> as pwrif
 
+    extends <http://dw-oml-3.github.io/ss#> as ss
     extends <http://dw-oml-3.github.io/components#> as cmp
 
 	uses <http://dw-oml-3.github.io/foundation/base/base#> as base
@@ -15,13 +16,25 @@ description <http://dw-oml-3.github.io/junctions#> as junctions {
         sys:joins cmp:CMP_1_PIN1
         sys:joins cmp:CMP_3_M1
         sys:junctionId "JMC1"
+        sys:connectsSubsystem ss:SS_MOBILITY
+        sys:connectsComponent cmp:CMP_1
+        sys:connectsComponent cmp:CMP_3
     ]
 
     instance JP1 : pwrif:SupplyDCPower [
         base:hasDescription "DC power to motor controller "
-        sys:junctionId "JPC1"
+        sys:junctionId "JP1"
         sys:joins cmp:CMP_4_PO1
-    
         sys:joins cmp:CMP_3_PIN1
+        sys:connectsSubsystem ss:SS_POWER
+        sys:connectsComponent cmp:CMP_3
+        sys:connectsComponent cmp:CMP_4
+    ]
+
+    instance JP2 : pwrif:SupplyDCPower [
+        base:hasDescription "DC power to prop controller "
+        sys:junctionId "JP2"
+        sys:connectsSubsystem ss:SS_POWER
+        sys:connectsSubsystem ss:SS_PROP
     ]
 }

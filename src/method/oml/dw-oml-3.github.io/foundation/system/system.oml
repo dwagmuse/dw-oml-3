@@ -20,6 +20,8 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
         from PerformingElement
         to Function
         inverse functional
+        asymmetric
+		irreflexive
     ]
 
     concept Composable < PerformingElement, base:IdentifiedElement
@@ -74,6 +76,8 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
         to PresentedElement
         reverse presentedBy
         inverse functional
+        asymmetric
+		irreflexive
     ]
 
     @dc:description """A Junction represents a functional connection between Interfaces presented by Components.
@@ -82,9 +86,16 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
     design details that may not be relevant at the system level."""
     concept Junction < base:IdentifiedElement
 
+    @dc:description """Junctions join Interfaces. To allow for incompleteness while a model
+    is being built there is no minimum cardinality on this relation but a complete junction
+    should join at least two interfaces. There is no max cardinality. There is also no limit
+    on the number of times a given interface may be joined at the base level, though
+    specializations may enforce stricter rules (e.g., physical connectors)"""
     relation joins [
         from Junction
         to Interface
+        asymmetric
+		irreflexive
     ]
 
     scalar property junctionId [
@@ -106,11 +117,12 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
     ] < base:hasIdentifier 
     
     @dc:description """Relates a junction to an individual component.
-    If junction is also joined to a subsystem the target component must be a member of the target subsystem. """
+    If junction is also joined to a subsystem the target component must be a member of the target subsystem. 
+    A junction should connect one or more components but we don't enforce min cardinality strictly
+    in order to allow for incomplete models during construction."""
     relation connectsComponent [
         from Junction
         to Component
-        functional
         asymmetric
         irreflexive
     ]
@@ -119,7 +131,6 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
     relation connectsSubsystem [
         from Junction
         to Subsystem
-        functional
         asymmetric
         irreflexive
     ]
