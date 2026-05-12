@@ -37,4 +37,12 @@ description <http://dw-oml-3.github.io/junctions#> as junctions {
         sys:connectsSubsystem ss:SS_POWER
         sys:connectsSubsystem ss:SS_PROP
     ]
+
+    instance JP3 : pwrif:SupplyDCPower [
+        base:hasDescription "DC power to H7 "
+        sys:junctionId "JP3"
+        sys:connectsSubsystem ss:SS_POWER
+        sys:connectsSubsystem ss:SS_THERMAL
+        sys:joins cmp:CMP_7_PIN1
+    ]
 }

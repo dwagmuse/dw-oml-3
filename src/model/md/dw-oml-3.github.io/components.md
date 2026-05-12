@@ -1,5 +1,5 @@
 ---
-ontology: http://dw-oml-3.github.io/components
+ontology: http://dw-oml-3.github.io/bundle
 ---
 # Components
 
@@ -26,7 +26,7 @@ WHERE {
         ?iri sys:presents ?if .  
     }    
 } 
-ORDER BY ?subs ?iri
+ORDER BY ?subs ?id
 
 ```
 

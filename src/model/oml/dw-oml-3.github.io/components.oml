@@ -4,12 +4,9 @@ split this up into separate files by subsystem."""
 description <http://dw-oml-3.github.io/components#> as cmp {
     uses <http://purl.org/dc/elements/1.1/> as dc
     uses <http://dw-oml-3.github.io/foundation/base/base#> as base
-    //uses <http://dw-oml-3.github.io/foundation/project/project#> as project
     uses <http://dw-oml-3.github.io/foundation/system/system#> as sys
     uses <http://dw-oml-3.github.io/library/power/components#> as pwr
-
-	uses <http://dw-oml-3.github.io/library/power/interfaces#> as powerif
-
+    uses <http://dw-oml-3.github.io/library/power/interfaces#> as powerif
     extends <http://dw-oml-3.github.io/ss#> as ss
 
     instance CMP_1 : pwr:3PhaseMotor [
@@ -18,6 +15,7 @@ description <http://dw-oml-3.github.io/components#> as cmp {
         sys:composedIn ss:SS_MOBILITY
         base:hasDescription "Main motor"
     ]
+
     instance CMP_1_PIN1 : powerif:3PhasePowerLoad [
         sys:presentedBy CMP_1
         sys:interfaceId "CMP_1_PIN"
@@ -25,9 +23,10 @@ description <http://dw-oml-3.github.io/components#> as cmp {
 
     instance CMP_2 : pwr:Heater [
         base:hasCanonicalName "Heater 1"
-        sys:componentId "Heater_1"
+        sys:componentId "HEATER_1"
         sys:composedIn ss:SS_THERMAL
     ]
+
     instance CMP_2_PIN1 : powerif:DCPowerLoad [
         sys:presentedBy CMP_2
         sys:interfaceId "CMP_2_PIN"
@@ -39,11 +38,13 @@ description <http://dw-oml-3.github.io/components#> as cmp {
         sys:composedIn ss:SS_MOBILITY
         base:hasDescription "Motor controller"
     ]
+
     instance CMP_3_PIN1 : powerif:DCPowerLoad [
         sys:presentedBy CMP_3
         sys:interfaceId "CMP_3_PIN"
         base:hasCanonicalName "Input"
     ]
+
     instance CMP_3_M1 : powerif:3PhasePowerSource [
         sys:presentedBy CMP_3
         sys:interfaceId "CMP_3_M1"
@@ -55,20 +56,46 @@ description <http://dw-oml-3.github.io/components#> as cmp {
         sys:composedIn ss:SS_POWER
         base:hasDescription "Power Distribution"
     ]
+
     instance CMP_4_PO1 : powerif:DCPowerSource [
         sys:presentedBy CMP_4
         sys:interfaceId "CMP_4_PO1"
     ]
+
     instance CMP_4_PO2 : powerif:DCPowerSource [
         sys:presentedBy CMP_4
         sys:interfaceId "CMP_4_PO2"
     ]
+
     instance CMP_4_PO3 : powerif:DCPowerSource [
         sys:presentedBy CMP_4
         sys:interfaceId "CMP_4_PO3"
     ]
+
     instance CMP_4_PO4 : powerif:DCPowerSource [
         sys:presentedBy CMP_4
         sys:interfaceId "CMP_4_PO4"
+    ]
+
+    instance CMP_5 : pwr:Heater [
+        base:hasCanonicalName "Heater 5"
+        sys:componentId "HEATER_5"
+        sys:composedIn ss:SS_THERMAL
+    ]
+    instance CMP_5_PIN1 : powerif:DCPowerLoad [
+        sys:presentedBy CMP_5
+        sys:interfaceId "CMP_5_PIN"
+        base:hasCanonicalName "Input"
+    ]
+
+    instance CMP_7 : pwr:Heater [
+        base:hasCanonicalName "Heater 7"
+        sys:componentId "HEATER_7"
+        sys:composedIn ss:SS_THERMAL
+    ]
+    instance CMP_7_PIN1 : powerif:DCPowerLoad [
+        sys:presentedBy CMP_7
+        sys:interfaceId "CMP_7_PIN"
+        base:hasCanonicalName "Input"
     ]
 }

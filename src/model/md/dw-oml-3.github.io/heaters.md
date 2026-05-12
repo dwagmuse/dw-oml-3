@@ -13,11 +13,12 @@ columns: { focus: { label: "CMP", prefix: "CMP_" } }
 @prefix base: <http://dw-oml-3.github.io/foundation/base/base#> .
 
 @prefix ss: <http://dw-oml-3.github.io/foundation/system/system#> .
-@prefix ee: <http://dw-oml-3.github.io/library/electrical/components#> .
+@prefix pwr: <http://dw-oml-3.github.io/library/power/components#> .
+@prefix pwrif: <http://dw-oml-3.github.io/library/power/interfaces#> .
 
 ss:CShape
     a sh:NodeShape ;
-    sh:targetClass ee:Heater ;
+    sh:targetClass pwr:Heater ;
     sh:property [
         sh:path base:hasCanonicalName ;
         sh:name "Name" ;
@@ -27,7 +28,12 @@ ss:CShape
         sh:path ss:componentId ;
         sh:name "ID" ;
         sh:maxcount 1 ;
-    ] 
+    ] ;
+    sh:property [
+        sh:path ss:composedIn ;
+        sh:name "Subsystem" ;
+        sh:class ss:Subsystem ;
+    ]
     .
 ```
 
