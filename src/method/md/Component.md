@@ -51,6 +51,51 @@ WHERE {
 GROUP BY ?g ?Property
 ORDER BY STRAFTER(STR(?Property), "#")
 ```
+## Interface Map
+
+This table should list all of the interfaces presented by this component. 
+
+Why is it not showing joined Junctions?
+
+```table
+---
+stylesheet:
+  - selector: header[name === "g"], column[name === "g"]
+    style:
+      display: "none"
+  - selector: cell[col === "Values" && row.get("g").endsWith("__entailments")]
+    target: value
+    style:
+      padding: 4px 12px
+      border-radius: 999px
+      font-size: 12px
+      background-color: pink
+---
+PREFIX base: <http://dw-oml-3.github.io/foundation/base/base#>
+PREFIX sys:  <http://dw-oml-3.github.io/foundation/system/system#>
+
+SELECT ?If ?Id ?Name ?Junction
+
+WHERE {
+
+  <${member}> sys:presents ?If .
+
+  OPTIONAL {
+    ?If sys:interfaceId ?Id .
+  }
+  
+  OPTIONAL {
+    ?If base:hasCanonicalName ?Name .
+  }
+
+  OPTIONAL {
+    ?Junction sys:joins ?If .
+  }
+
+}
+ORDER BY ?Id
+
+```
 
 ## Relations
 

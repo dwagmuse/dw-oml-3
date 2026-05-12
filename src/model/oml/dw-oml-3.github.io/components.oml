@@ -16,9 +16,11 @@ description <http://dw-oml-3.github.io/components#> as cmp {
         base:hasCanonicalName "Drive motor"
         sys:componentId "Motor_1"
         sys:composedIn ss:SS_MOBILITY
+        base:hasDescription "Main motor"
     ]
     instance CMP_1_PIN1 : powerif:3PhasePowerLoad [
         sys:presentedBy CMP_1
+        sys:interfaceId "CMP_1_PIN"
     ]
 
     instance CMP_2 : pwr:Heater [
@@ -28,6 +30,7 @@ description <http://dw-oml-3.github.io/components#> as cmp {
     ]
     instance CMP_2_PIN1 : powerif:DCPowerLoad [
         sys:presentedBy CMP_2
+        sys:interfaceId "CMP_2_PIN"
     ]
 
     instance CMP_3 : sys:Component [
@@ -38,9 +41,12 @@ description <http://dw-oml-3.github.io/components#> as cmp {
     ]
     instance CMP_3_PIN1 : powerif:DCPowerLoad [
         sys:presentedBy CMP_3
+        sys:interfaceId "CMP_3_PIN"
+        base:hasCanonicalName "Input"
     ]
     instance CMP_3_M1 : powerif:3PhasePowerSource [
         sys:presentedBy CMP_3
+        sys:interfaceId "CMP_3_M1"
     ]
 
     instance CMP_4 : sys:Component [
@@ -51,14 +57,18 @@ description <http://dw-oml-3.github.io/components#> as cmp {
     ]
     instance CMP_4_PO1 : powerif:DCPowerSource [
         sys:presentedBy CMP_4
+        sys:interfaceId "CMP_4_PO1"
     ]
     instance CMP_4_PO2 : powerif:DCPowerSource [
         sys:presentedBy CMP_4
+        sys:interfaceId "CMP_4_PO2"
     ]
     instance CMP_4_PO3 : powerif:DCPowerSource [
         sys:presentedBy CMP_4
+        sys:interfaceId "CMP_4_PO3"
     ]
     instance CMP_4_PO4 : powerif:DCPowerSource [
         sys:presentedBy CMP_4
+        sys:interfaceId "CMP_4_PO4"
     ]
 }

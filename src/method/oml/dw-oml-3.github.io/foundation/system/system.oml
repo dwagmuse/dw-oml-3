@@ -94,6 +94,7 @@ vocabulary <http://dw-oml-3.github.io/foundation/system/system#> as system {
     relation joins [
         from Junction
         to Interface
+        reverse isJoinedBy
         asymmetric
 		irreflexive
     ]
