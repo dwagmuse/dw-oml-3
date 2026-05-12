@@ -48,8 +48,9 @@ vocabulary <http://dw-oml-3.github.io/library/power/interfaces#> as powerif {
     concept SupplyDCPower < SupplyPower [
         restricts all system:joins to DCPowerEndCircuit
     ]
+    // Some kinds of switches
     @dc:description "Generalizaton for all Power Switches having a current rating property"
-	concept PowerSwitch < DCPowerSource
+	concept DCSwitch < DCPowerSource
 
     concept ACPowerEndCircuit < PowerEndCircuit
     concept ACPowerLoad < ACPowerEndCircuit [

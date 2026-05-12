@@ -54,7 +54,7 @@ description <http://dw-oml-3.github.io/components#> as cmp {
         base:hasCanonicalName "PC 1"
         sys:componentId "PC_1"
         sys:composedIn ss:SS_POWER
-        base:hasDescription "Power Distribution"
+        base:hasDescription "Power Distribution unit with no switching"
     ]
 
     instance CMP_4_PO1 : powerif:DCPowerSource [
