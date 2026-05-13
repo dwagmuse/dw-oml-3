@@ -11,9 +11,9 @@ a common base type
 columns: { iri: { label: "element"} }
 ---
 PREFIX base: <http://dw-oml-3.github.io/foundation/base/base#> 
-PREFIX sys: <http://dw-oml-3.github.io/foundation/system/system#> 
+PREFIX sys:  <http://dw-oml-3.github.io/foundation/system/system#> 
 
-SELECT ?iri ?name ?id ?if ?subs
+SELECT ?iri (GROUP_CONCAT(DISTINCT(?name)) AS ?Name) (GROUP_CONCAT(DISTINCT(?id)) AS ?Id) (GROUP_CONCAT(DISTINCT(?subs)) AS ?Sub) (GROUP_CONCAT(DISTINCT(?if)) AS ?Ports)
 
 WHERE {
     ?iri a sys:Component ;
@@ -26,7 +26,8 @@ WHERE {
         ?iri sys:presents ?if .  
     }    
 } 
-ORDER BY ?subs ?id
+GROUP BY ?subs ?iri
+ORDER BY ?subs ?iri
 
 ```
 

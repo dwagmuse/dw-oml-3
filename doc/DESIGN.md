@@ -11,7 +11,7 @@ The key vocabulary used here is as follows:
 * Junctions specify the need to deliver signals between Interfaces
 * Interfaces and Junctions can be typed by different signal types and rules established constraining type consistency between joined Interfaces and Junctions
 
-## Interface Specification Process
+## User Experience
 
 During the architecting process a project will identify key functions the system needs to perform, decompose those into functions that can be implemented, and organize the functions into cohesive groups that can be allocated to different implementing organizations so that the work of implementation can proceed concurrently on each such subsystem. The system still depends on being able to functionally integrate the separate subsystems so that they can communicate signals between them to coordinate system functionality.
 
@@ -21,7 +21,31 @@ The process of elaborating and satisfying such connection demands views each unc
 
 System engineers typically manage a burndown list of interfaces that have to be specified, designed, implemented, integrated, and finally tested. This application aims to help develop and manage that list in the form of a model.
 
-The model needs to support an incremental specification process where a Junction can first be identified as joining subsystem to subsystem (e.g., we assume that a subsystem will need power and so allocate a junction from the power subsystem to the instrument subsystem to identify the need to elaborate details). As each connected subsystem design matures they can allocate the junction to specific Components and Interfaces within the subsystem. The Junction is not considered to be fully specified until it joins a minimum number of Interfaces.
+Specification can begin from several starting points:
+* junctions are identified as component demands are identified. E.g., power loads are often identified this way. The source end of such junctions may initially be allocated only to the power subsystem awaiting identification of a component source.
+* junctions are identified abstractly at a subsystem level. E.g., the design assumes that a data bus will need to join two subsystems before specific components are identified in either subsystem
+* junctions are identified after the design has matured sufficiently to target specific components but not necessarily specific interfaces. E.g., a power junction might target a switch card but defer selecting a specific switch.
+* all details are known and can be specified immediately.
+
+In all but the last case the specification process proceeds incrementally until sufficient detail is achieved.
+
+This process assumes that the specified junction topology will then be elaborated in an E-CAD tool into a detailed wiring design. Tools such as Siemens' CAPITAL LOGIC are good at this: elaborating wiring properties, mapping logical interfaces to physical connectors and pins, and specifying how wires are bundled into harnesses.  The electrical design will then be elaborated into a physical harness design in a mechanical CAD tool.
+
+Systems that have sufficiently simple interconnectivity (few components/junctions) probably don't benefit very much from a tool like this, but for more complex systems, it is very useful to clarify the topological specification before starting the detailed electrical design -- particularly if the architecture is unstable.
+
+### Tool User Experience
+
+In most cases, components are first specified as a template pattern that identifies a particular pattern of presented interfaces. Component instances can then be instantiated into the model by expressing a template pattern and adding any instance-specific properties (some properties may be auto-generated from others). Libraries of existing components make it easier for users to instantiate them into a model and particularly to instantiate multiple instances (a design will often use many instances of certain common parts such as sensors or actuators).
+
+Because the process is iterative, it is critical to the user experience that the model can be incrementally refined: Components and interfaces are added, junctions are identified and refined, and properties are added/updated. Some of this work is driven by comparing the state of the model with other architectural artifacts (e.g., documents) to identify discrepancies or work to go. Thus, it is essential that views are provided to help users identify incompleteness or inconsistency in the model.
+
+Although OML/OWL can express restrictions and multiplicity rules that might apply to a completed model, many of those are relaxed in the OML vocabulary in order to allow the model to be implemented incrementally and still satisfy OWL validation.
+This means that the application needs to enforce those rules through the user interface in a manner that will report them to the user as work to go rather than as errors.
+
+Users are typically not sufficiently experienced with OML to directly edit the model source code. This means that the application needs to provdide editable views to input/edit all information.
+
+Since topological specification is part of architecting, it often occurs that entire subsystems can be added or removed, or components reallocated to different subsystems for various reasons. Such structural refactoring may not happen very often but can create model havoc if not done right. Thus, it is necessary to support some common refactoring opeations such as moving a (connected) component to a different subsystem. (topologically, this isn't so hard to do, but there may be a cascade of derived properties that have to be updated and kept distinct).
+
 
 ## Model Functionality
 
@@ -68,4 +92,7 @@ The connection list should show for each junction its set of joined subsystem:co
 * simplified base to remove containment and aggregation as generalizations. Those were inherited from UML but are not necessary or even helpful in OML where relations can more easily be distinct. Avoiding those generalizations also avoids a lot of semantic conflict.
 
 
+# TODO
 
+* as of omlc 0.15 I still can't define component shape templates or instantiate anything other than simple shapes (one object) in the UI
+* current table views are limited to what can be expressed using pure SPARQL + CSS. 
