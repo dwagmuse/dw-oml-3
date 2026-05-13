@@ -9,7 +9,7 @@ a common base type.
 
 ```table
 ---
-columns: { iri: { label: "Element"} }
+columns: { iri: { label: "Junction"} }
 stylesheet:
   - selector: header[name === "g"], column[name === "g"]
     style:
