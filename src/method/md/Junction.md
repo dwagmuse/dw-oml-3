@@ -1,13 +1,13 @@
 ---
 template:
-  id: http://dw-oml-3.github.io/foundation/system/system/Interface
-  name: "Interface"
+  id: http://dw-oml-3.github.io/foundation/system/system/Junction
+  name: "Junction"
   rank: 0
   expose:
     - kind: navigation
       match:
         anyTypeOf: 
-          - http://dw-oml-3.github.io/foundation/system/system#Interface
+          - http://dw-oml-3.github.io/foundation/system/system#Junction
   params:
     - id: member
       type: iri
@@ -19,6 +19,19 @@ template:
       required: true
 ---
 # [[${member}]]
+
+## Description
+
+```text
+PREFIX base: <https://dw-oml-3.github.io/foundation/base/base#>
+
+SELECT ?description
+WHERE {
+    GRAPH ?g {
+        <${member}> base:hasDescription ?description .
+    }
+}
+```
 
 ## Properties
 
@@ -51,49 +64,56 @@ GROUP BY ?g ?Property
 ORDER BY STRAFTER(STR(?Property), "#")
 ```
 
-## Connectivity
+## Missing Connects Subsystem Relations
 
-Shows junctions joined to this interface and their
-connectivity.
-
-This is an example of how to expose the immediate type while suppressing entailed types.
-
-Note: needs to be generalized to support indirect interfaces (ganged or grouped interfaces)
+Find any connected components not in a subsystem listed in connected subsystems
 
 ```table
----
-stylesheet:
-  - selector: header[name === "g"], column[name === "g"]
-    style:
-      display: "none"
-  - selector: cell[col === "g" && row.get("g").endsWith("__entailments")]
-    target: value
-    style:
-      padding: 4px 12px
-      border-radius: 999px
-      font-size: 12px
-      background-color: pink
----
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX oml: <http://opencaesar.io/oml#>
-PREFIX sys: <http://dw-oml-3.github.io/foundation/system/system#>
 
-SELECT ?g ?Junction ?Type ?Jid ?Subsystem ?Component ?Port
+PREFIX base: <http://dw-oml-3.github.io/foundation/base/base#>
+PREFIX sys:  <http://dw-oml-3.github.io/foundation/system/system#>
 
+SELECT ?Subsystem ?Component
 WHERE {
-  ?Junction sys:joins <${member}> .
-  ?Junction sys:joins ?Port ;
-    sys:junctionId ?Jid .
-  ?Component sys:presents ?Port .
-  ?Subsystem sys:composes ?Component .
-  GRAPH ?g {
-    ?Junction a ?Type .
-  }
-  # This filters out entailed types
-  FILTER (!contains(str(?g), "entailments"))
+    <${member}> sys:connectsComponent ??Component .
+    ?Subsystem sys:composes ?Component .
+    FILTER NOT EXISTS { <${member}> sys:connectsSubsystem ?Subsystem }
 }
-ORDER BY ?Subsystem ?Component ?Port
+```
 
+## Missing Connects Component Relations
+
+Report any instances where the junction joins to
+an interface whose presenting component is not
+related by connectsComponent. This should not happen if the UI only allows joins to select interfaces presented by related components.
+
+```table
+
+PREFIX base: <http://dw-oml-3.github.io/foundation/base/base#>
+PREFIX sys:  <http://dw-oml-3.github.io/foundation/system/system#>
+
+SELECT ?Subsystem ?Component ?Interface 
+WHERE {
+    <${member}> sys:joins ?Interface .
+    ?Component sys:presents ?Interface .
+    ?Subsystem sys:composes ?Component .
+    FILTER NOT EXISTS { <${member}> sys:connectsComponent ?Component }
+}
+```
+## Related Interfaces
+
+```table
+
+PREFIX base: <http://dw-oml-3.github.io/foundation/base/base#>
+PREFIX sys:  <http://dw-oml-3.github.io/foundation/system/system#>
+
+SELECT ?Subsystem ?Component ?Interface
+WHERE {
+    <${member}> sys:joins ?Interface .
+    ?Component sys:presents ?Interface .
+    ?Subsystem sys:composes ?Component .
+}
+ORDER BY ?Subsystem ?Component
 ```
 
 ## Relations

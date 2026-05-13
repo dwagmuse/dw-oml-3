@@ -37,6 +37,10 @@ Systems that have sufficiently simple interconnectivity (few components/junction
 
 In most cases, components are first specified as a template pattern that identifies a particular pattern of presented interfaces. Component instances can then be instantiated into the model by expressing a template pattern and adding any instance-specific properties (some properties may be auto-generated from others). Libraries of existing components make it easier for users to instantiate them into a model and particularly to instantiate multiple instances (a design will often use many instances of certain common parts such as sensors or actuators).
 
+We assume there are two classes of user: 
+* modelers who can manage the library by creating new types and associated templates and code
+* engineers who can use the library to instantiate new components (with associated interfaces) and junctions into the model. These users may not understand the model syntax and so interact with the model exclusively through provided views
+
 Because the process is iterative, it is critical to the user experience that the model can be incrementally refined: Components and interfaces are added, junctions are identified and refined, and properties are added/updated. Some of this work is driven by comparing the state of the model with other architectural artifacts (e.g., documents) to identify discrepancies or work to go. Thus, it is essential that views are provided to help users identify incompleteness or inconsistency in the model.
 
 Although OML/OWL can express restrictions and multiplicity rules that might apply to a completed model, many of those are relaxed in the OML vocabulary in order to allow the model to be implemented incrementally and still satisfy OWL validation.
@@ -85,11 +89,14 @@ The connection list should show for each junction its set of joined subsystem:co
 * ...
 
 
-## Vocabulary and Modifications from CAESAR
+## Modifications from CAESAR and openCAESAR
 
 * renamed mission -> system to clarify that this is about the subject of requirements which is more generally the system being delivered/operated. The system may have a mission (goals) that can also be subject to requirements but not all systems have missions.
 
 * simplified base to remove containment and aggregation as generalizations. Those were inherited from UML but are not necessary or even helpful in OML where relations can more easily be distinct. Avoiding those generalizations also avoids a lot of semantic conflict.
+
+* The CAESAR vocabulary used a junction naming convention that assumed binary connections between two subsystems and used this convention to structure the junctions views. Specifically, it explicitly grouped junctions by subsystem pair and the subsystem pair groups were explicit containers in some forms of the model. This worked in most cases but prevented the modeling of any junctions having more than two "ends" such as networks that might join multiple subsystems. The trivial case of junctions having both ends in the same subsystem required a self-self container. The main benefit of this was that the junction list could be ordered by pair containers and this made it easy to locate a given junction. In the new scheme there are no pair containers or even the assumption of binary connections. A junction can join a one or more interfaces (in most cases, a minimum of two ends are required for a meaningful junction but the schema allows for incomplete specification -- cardinality is checked in the UI). 
+
 
 
 # TODO
