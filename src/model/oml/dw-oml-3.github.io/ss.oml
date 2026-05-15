@@ -4,7 +4,7 @@ description <http://dw-oml-3.github.io/ss#> as ss {
     uses <http://purl.org/dc/elements/1.1/> as dc
     uses <http://dw-oml-3.github.io/foundation/base/base#> as base
     uses <http://dw-oml-3.github.io/foundation/system/system#> as sys
-    
+
     instance SS_POWER : sys:Subsystem [
         base:hasCanonicalName "Power Subsystem"
         sys:subsystemId "POWER"
@@ -28,5 +28,10 @@ description <http://dw-oml-3.github.io/ss#> as ss {
     instance SS_THERMAL : sys:Subsystem [
         base:hasCanonicalName "Thermal Subsystem"
         sys:subsystemId "THERM"
+    ]
+
+    instance SS_DATA : sys:Subsystem [
+        base:hasCanonicalName "Data Subsystem"
+        sys:subsystemId "SS_DATA"
     ]
 }

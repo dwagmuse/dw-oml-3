@@ -18,6 +18,16 @@
   <tr>
     <td>1. <a href="./components.md">Components</a></td>
   </tr>
+    <tr>
+    <td>1. <a href="./componentsR.md">Components (WASM R)</a></td>
+  </tr>
+
+   <tr>
+    <td>1. <a href="./componentsP.md">Components (WASM Python)</a></td>
+  </tr>
+  <tr>
+    <td>1. <a href="./componentsJ.md">Components (WASM Javascript)</a></td>
+  </tr>
 </table>
 
 ## Specialized Components

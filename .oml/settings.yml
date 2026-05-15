@@ -9,7 +9,6 @@ project:
    group: io.github.dw-oml-3
    version: 0.1.0
 
-
 # source folders
 sources:
   oml:
@@ -29,7 +28,7 @@ dependencies:
 
 # oml server settings
 server:
-  port: 8080
+  port: 8081
 
 # oml-cli parameter defaults
 defaults:
