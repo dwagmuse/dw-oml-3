@@ -69,7 +69,7 @@ function generateTable(data) {
       const cell = row.insertCell();
       const bd = item[key];
       if (bd.startsWith('http')) {
-        cell.textContent = toWikiLink(item[key]);
+        cell.appendChild(toWikiLink(item[key]));
       } else {
         cell.textContent = frag(item[key]);
       }
