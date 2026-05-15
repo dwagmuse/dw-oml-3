@@ -24,7 +24,7 @@ frag <- function(iri) { parts <- strsplit(iri, "[#/]")[[1]]; tail(parts[nchar(pa
 # generated links don't work the same
 # as the ones in native tables
 tolink <- function(iri) {
-  paste0("<a href='",iri,"'>", frag(iri), "</a>")
+  paste0("<a class='wikilink' iri='",iri,"' href='#' title='",iri,"' >", frag(iri), "</a>")
 }
 
 tolinks <- function(iris) {
