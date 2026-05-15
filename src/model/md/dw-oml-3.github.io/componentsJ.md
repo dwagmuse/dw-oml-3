@@ -12,6 +12,16 @@ This table is generated using javascript so that we have more control over custo
 const frag = iri => iri.split(/[#\/]/).pop();
 const toId = iri => frag(iri).replace(/\W/g, '_');
 
+function toWikiLink(iri) {
+  const a = document.createElement('a');
+  a.className = 'wikilink';
+  a.setAttribute('iri', iri)
+  a.href = "#"
+  a.title = iri
+  a.text = frag(iri)
+  return a
+}
+
 const result = await query(`
 PREFIX base: <http://dw-oml-3.github.io/foundation/base/base#> 
 PREFIX sys:  <http://dw-oml-3.github.io/foundation/system/system#> 
@@ -57,13 +67,24 @@ function generateTable(data) {
     const row = tbody.insertRow();
     keys.forEach(key => {
       const cell = row.insertCell();
-      cell.textContent = frag(item[key]);
+      const bd = item[key];
+      if (bd.startsWith('http')) {
+        cell.textContent = toWikiLink(item[key]);
+      } else {
+        cell.textContent = frag(item[key]);
+      }
+      
+      // if item[key] starts with http we interpret 
+      // as an iri and generate a link
     });
   });
 
   return table
 }
 
-display(generateTable(result['rows']).getHTML());
+const t = generateTable(result['rows']);
+const c = document.createElement('div');
+c.appendChild(t);
+display(c.getHTML());
 
 ```
