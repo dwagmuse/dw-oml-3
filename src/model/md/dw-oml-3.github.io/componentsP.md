@@ -18,6 +18,8 @@ import pandas as pd
 
 frag = lambda iri: (iri or '').split('#')[-1].split('/')[-1]
 
+toLink = lambda iri: f"<a class='wikilink' iri='{iri}' href='#' title='{iri}'> {frag(iri)} </a>"
+
 
 data = await query("""
 PREFIX base: <http://dw-oml-3.github.io/foundation/base/base#> 
@@ -48,12 +50,12 @@ df = pd.DataFrame(data['rows'])
 df = df[['subs','iri','id','name','t','p']]
 df.rename(columns={'subs': 'Subsystem', 'iri':'Element', 't':'Type', 'p':'Port'}, inplace=True)
 
-df['Subsystem'] = df['Subsystem'].apply(lambda x: frag(x))
-df['Element'] = df['Element'].apply(lambda x: frag(x))
+df['Subsystem'] = df['Subsystem'].apply(lambda x: toLink(x))
+df['Element'] = df['Element'].apply(lambda x: toLink(x))
 df['Type'] = df['Type'].apply(lambda x: frag(x))
-df['Port'] = df['Port'].apply(lambda x: frag(x))
+df['Port'] = df['Port'].apply(lambda x: toLink(x))
 
-html_table = df.to_html(index=False) 
+html_table = df.to_html(index=False, escape=False) 
 
 #display(data['rows'])
 display(html_table)
