@@ -43,3 +43,43 @@ GROUP BY ?g ?iri ?Type
 
 ```
 
+## Breakdown by Type
+
+
+  </div>
+  <div style="flex:1; min-width:280px;">
+
+```chart
+---
+type: pie
+data:
+  labels: Type
+  datasets:
+    - label: Requirements
+      data: count
+options:
+  plugins:
+    title:
+      display: true
+      text: Junctions by Type
+    legend:
+      position: right
+---
+PREFIX base: <http://dw-oml-3.github.io/foundation/base/base#> 
+PREFIX sys: <http://dw-oml-3.github.io/foundation/system/system#> 
+
+SELECT (STRAFTER(str(?t), "#") AS ?Type) (COUNT(?t) AS ?count)
+WHERE {
+    ?j a sys:Junction .
+    GRAPH ?g {
+        ?j a ?t .
+    }
+    FILTER (!contains(str(?g), "entailments"))
+}
+GROUP BY ?t
+```
+
+  </div>
+</div>
+
+
