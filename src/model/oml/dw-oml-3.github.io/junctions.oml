@@ -46,10 +46,10 @@ description <http://dw-oml-3.github.io/junctions#> as junctions {
         sys:joins cmp:CMP_7_PIN1
     ]
 
-    instance JD1 : dataif:RS422Comm {
+    instance JD1 : dataif:RS422Comm [
         base:hasDescription "Power control "
         sys:junctionId "JD1"
         sys:connectsSubsystem ss:SS_POWER
         sys:connectsSubsystem ss:SS_DATA
-    }
+    ]
 }
