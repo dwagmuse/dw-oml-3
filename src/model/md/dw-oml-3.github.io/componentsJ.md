@@ -5,6 +5,15 @@ ontology: http://dw-oml-3.github.io/bundle
 
 This table is generated using javascript so that we have more control over customization.
 
+LIBRARIES
+* [Danfo](https://danfo.jsdata.org/) no toHTML support
+* 
+
+TODO:
+* styling
+* how to limit collapse of type column to current Element
+
+
 ```javascript
 
 //await load('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js');
@@ -31,6 +40,7 @@ SELECT DISTINCT ?Subsystem ?Element ?Name ?Id ?Type ?Port
 WHERE {
     ?Element a sys:Component ;
         base:hasCanonicalName ?Name ;
+        sys:composedIn ?Subsystem ;
         sys:componentId ?Id  .
 
     GRAPH ?g {
@@ -38,16 +48,16 @@ WHERE {
     }
     # This filters out entailed types
     FILTER (!contains(str(?g), 'entailments'))
-    ?Subsystem sys:composes ?Element .
 
     OPTIONAL {
         ?Element sys:presents ?Port .  
     }    
 } 
-ORDER BY ?Subsystem ?Element ?Port
+ORDER BY ?Subsystem ?Id ?Port
 `);
 
-
+// modify to take a column array that we can use
+// to map data into ordered columns?
 function generateTable(data) {
   const table = document.createElement('table');
   const thead = table.createTHead();
@@ -73,18 +83,54 @@ function generateTable(data) {
       } else {
         cell.textContent = frag(item[key]);
       }
-      
-      // if item[key] starts with http we interpret 
-      // as an iri and generate a link
     });
   });
 
   return table
 }
 
-const t = generateTable(result['rows']);
+function mergeRows(table, colIndex) {
+  let lastValue = null;
+  let firstCell = null;
+  let spanCount = 1;
+
+  // Iterate through all rows in the table body
+  for (let i = 0; i < table.rows.length; i++) {
+    const currentCell = table.rows[i].cells[colIndex];
+    const currentValue = currentCell.innerText;
+
+    if (currentValue === lastValue) {
+      // If same value, hide current cell and increase span of the first cell
+      currentCell.style.display = 'none';
+      spanCount++;
+      firstCell.rowSpan = spanCount;
+    } else {
+      // If different value, reset tracking to current cell
+      lastValue = currentValue;
+      firstCell = currentCell;
+      spanCount = 1;
+    }
+  }
+}
+
+// each row is a list of tuples: key:value
+// we need to reorganize this into a map with
+// keys and lists of column values 
+
+const rows = result['rows']
+
+// for some reason the columns come out in different
+// order from that specified in the SELECT
+
+const t = generateTable(rows);
 const c = document.createElement('div');
 c.appendChild(t);
+
+//display(JSON.stringify(rows[0]) )
+mergeRows(t, 0)
+mergeRows(t, 1)
+mergeRows(t, 2)
+//mergeRows(t, 3)
 display(c.getHTML());
 
 ```

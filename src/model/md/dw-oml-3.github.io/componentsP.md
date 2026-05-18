@@ -7,9 +7,7 @@ ontology: http://dw-oml-3.github.io/bundle
 Generated using python
 
 TODO:
-* hyperlinks to elements
 * styling
-* collapse rows
 
 ```python
 import micropip
@@ -43,7 +41,7 @@ WHERE {
         ?iri sys:presents ?p .  
     }    
 } 
-ORDER BY ?subs ?iri
+ORDER BY ?subs ?iri ?p
 """)
 
 df = pd.DataFrame(data['rows'])
@@ -55,7 +53,9 @@ df['Element'] = df['Element'].apply(lambda x: toLink(x))
 df['Type'] = df['Type'].apply(lambda x: frag(x))
 df['Port'] = df['Port'].apply(lambda x: toLink(x))
 
-html_table = df.to_html(index=False, escape=False) 
+df.set_index(['Subsystem', 'Element','id', 'name', 'Type'], inplace=True)
+
+html_table = df.to_html(escape=False) 
 
 #display(data['rows'])
 display(html_table)

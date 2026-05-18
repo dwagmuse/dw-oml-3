@@ -7,15 +7,18 @@ ontology: http://dw-oml-3.github.io/bundle
 Here we generate the components table using R scripting
 
 FIXME:
-* how to make links work in omlcode views?
 * collapse rows in table?
 * styling
 
+The old htmlTable library is rather limited in its
+formatting options.
 
 ```r
 webr::install("dplyr")
 webr::install("htmlTable")
+webr::install("huxtable")
 library(htmlTable)
+library(huxtable)
 library(dplyr)
 
 frag <- function(iri) { parts <- strsplit(iri, "[#/]")[[1]]; tail(parts[nchar(parts) > 0], 1) }
@@ -69,11 +72,19 @@ of <- result %>% transmute(
   Port=tolinks(p)
 )
 
-table <- htmlTable(of, caption="Components",
+table1 <- htmlTable(of, caption="Components",
+          #rgroup=c('Subsystem','Element','Name','Id','Type'),
           align="l",
           align.header="l",
           rnames=FALSE) 
 
-display(table)
+
+#display(table1)
+
+ht <- hux(of)
+escape_contents(ht) <- FALSE 
+# seems like it should be easy to add rowspans here
+# but the examples for hux just don't work
+display(to_html(ht))
 ```
 
